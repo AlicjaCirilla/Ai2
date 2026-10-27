@@ -1,0 +1,48 @@
+App\Entity\Measurment:
+    properties:
+        Temperature:
+            - Range:
+                  min: -273
+                  max: 60
+                  notInRangeMessage: 'The temperature must be between -273 and 60.'
+                  groups: [create, edit]
+
+        Atmospheric_pressure:
+            - Range:
+                  min: 300
+                  max: 1200
+                  notInRangeMessage: 'The atmospheric pressure must be between 300 and 1200.'
+                  groups: [create, edit]
+        date:
+            -   NotBlank: ~
+                groups: [create, edit]
+        Wind:
+            -   NotBlank: ~
+                groups: [create, edit]
+        location:
+            -   NotNull: ~
+                groups: [create, edit]
+
+App\Entity\Location:
+    properties:
+        City:
+            - NotBlank: ~
+              groups: [create, edit]
+        Country:
+            - NotBlank: ~
+              groups: [create, edit]
+        Latitude:
+            - NotBlank: ~
+              groups: [create, edit]
+            - Range:
+                  min: -90
+                  max: 90
+                  notInRangeMessage: 'The latitude must be between -90 and 90.'
+                  groups: [create, edit]
+        Longitude:
+            - NotBlank: ~
+            - Range:
+                  min: -180
+                  max: 180
+                  notInRangeMessage: 'The longitude must be between -180 and 180.'
+                  groups: [create, edit]
