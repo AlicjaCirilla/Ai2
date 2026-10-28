@@ -14,7 +14,9 @@
                 <th>Atmospheric_pressure</th>
                 <th>Cloudiness</th>
                 <th>Wind</th>
+                {% if is_granted('ROLE_MEASURMENT_SHOW') or is_granted('ROLE_MEASURMENT_EDIT') %}
                 <th>actions</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -27,8 +29,12 @@
                 <td>{{ measurment.cloudiness }}</td>
                 <td>{{ measurment.Wind }}</td>
                 <td>
+                    {% if is_granted('ROLE_MEASURMENT_SHOW') %}
                     <a href="{{ path('app_measurment_show', {'id': measurment.id}) }}">show</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_MEASURMENT_EDIT') %}
                     <a href="{{ path('app_measurment_edit', {'id': measurment.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -38,6 +44,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% if is_granted('ROLE_MEASURMENT_NEW') %}
     <a href="{{ path('app_measurment_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

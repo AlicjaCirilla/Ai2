@@ -42,6 +42,14 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{{ '/measurment' }}">Measurments</a>
                     </li>
+                    <li>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a class="nav-link active" aria-current="page" href="{{ path('app_logout') }}">Logout</a>
+                        {% else %}
+                            <a class="nav-link active" aria-current="page" href="{{ path('app_login') }}">Login</a>
+                        {% endif %}
+
+                    </li>
                 </ul>
             </div>
         </div>

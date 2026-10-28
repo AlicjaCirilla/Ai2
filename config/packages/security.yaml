@@ -5,7 +5,24 @@ security:
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        # used to reload user from session & other features (e.g. switch_user)
+        users_in_memory:
+            memory:
+                users:
+                    admin:
+                        password: '12345678'
+                        roles:
+                            - "ROLE_ADMIN"
+                            - 'ROLE_USER'
+                    user:
+                        password: '$2y$13$PU1ileK7YLYX6SbqcOP78eSDBgtZvQ4dvag/Lyt19fT0WcBz3bNsS'
+                        roles:
+                            - 'ROLE_USER'
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: username
+        # used to reload user from session & other features (e.g. switch_user)
 
     firewalls:
         dev:
@@ -14,7 +31,12 @@ security:
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+                check_path: app_login
+            logout:
+                path: app_logout
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -26,6 +48,21 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/, roles: PUBLIC_ACCESS }
+    role_hierarchy:
+        ROLE_ADMIN:
+            - ROLE_USER
+            - ROLE_LOCATION_EDIT
+            - ROLE_LOCATION_NEW
+            - ROLE_LOCATION_DELETE
+            - ROLE_MEASURMENT_EDIT
+            - ROLE_MEASURMENT_NEW
+            - ROLE_MEASURMENT_DELETE
+        ROLE_USER:
+            - ROLE_LOCATION_INDEX
+            - ROLE_LOCATION_SHOW
+            - ROLE_MEASURMENT_INDEX
+            - ROLE_MEASURMENT_SHOW
 
 when@test:
     security:
