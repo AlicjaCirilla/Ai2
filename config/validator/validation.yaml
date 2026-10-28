@@ -13,34 +13,41 @@ App\Entity\Measurment:
                   max: 1200
                   notInRangeMessage: 'The atmospheric pressure must be between 300 and 1200.'
                   groups: [create, edit]
+
         date:
-            -   NotBlank: ~
-                groups: [create, edit]
+            - NotBlank:
+                  groups: [create, edit]
+
         Wind:
-            -   NotBlank: ~
-                groups: [create, edit]
+            - NotBlank:
+                  groups: [create, edit]
+
         location:
-            -   NotNull: ~
-                groups: [create, edit]
+            - NotNull:
+                  groups: [create, edit]
 
 App\Entity\Location:
     properties:
         City:
-            - NotBlank: ~
-              groups: [create, edit]
+            - NotBlank:
+                  groups: [create, edit]
+
         Country:
-            - NotBlank: ~
-              groups: [create, edit]
+            - NotBlank:
+                  groups: [create, edit]
+
         Latitude:
-            - NotBlank: ~
-              groups: [create, edit]
+            - NotBlank:
+                  groups: [create, edit]
             - Range:
                   min: -90
                   max: 90
                   notInRangeMessage: 'The latitude must be between -90 and 90.'
                   groups: [create, edit]
+
         Longitude:
-            - NotBlank: ~
+            - NotBlank:
+                  groups: [create, edit]
             - Range:
                   min: -180
                   max: 180
