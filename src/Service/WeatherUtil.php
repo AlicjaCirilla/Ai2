@@ -30,7 +30,7 @@ class WeatherUtil
      */
     public function getWeatherForCountryAndCity(string $countryCode, string $city): array
     {
-        $location= $this->locationRepository->findOneBy(['countryCode' => $countryCode, 'city' => $city]);
+        $location= $this->locationRepository->findOneBy(['Country' => $countryCode, 'City' => $city]);
 
         if (!$location) {
             return [];
