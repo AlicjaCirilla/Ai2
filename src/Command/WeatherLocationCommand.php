@@ -26,9 +26,12 @@ class WeatherLocationCommand{
 
         $measurements = $this->weatherUtil->getWeatherForLocation($location);
         $io->writeln(sprintf('Location: %s', $location->getCity()));
-        $io->table(['Date', 'Temperature'], array_map(fn($m) => [
+        $io->table(['Date', 'Temperature', 'Atmospheric pressure', 'Cloudiness', 'Wind'], array_map(fn($m) => [
             $m->getDate()->format('Y-m-d'),
             $m->getTemperature(),
+            $m->getAtmosphericPressure(),
+            $m->getCloudiness(),
+            $m->getWind()
         ], $measurements));
 
         return Command::SUCCESS;

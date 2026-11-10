@@ -1,0 +1,9 @@
+city, country, date, celsius, fahrenheit, atmospheric pressure, cloudiness, wind
+{{ "\n" |nl2br}}
+{{city}}, {{country}},
+{{ "\n" |nl2br}}
+{% for measurement in measurements %}
+{{ measurement.date | date('Y-m-d') | raw}}, {{ measurement.temperature }},{{ measurement.getFahrenheit() }},
+{{ measurement.getAtmosphericPressure() }}, {{measurement.cloudiness | raw}}, {{ measurement.wind }}
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
