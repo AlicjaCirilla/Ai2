@@ -15,7 +15,6 @@ use App\Service\WeatherUtil;
 )]
 class LocationInfoCommand{
     public function __construct(
-        private readonly LocationRepository $locationRepository,
         private readonly WeatherUtil  $weatherUtil,
     ) {
     }
@@ -26,9 +25,12 @@ class LocationInfoCommand{
     ): int {
         $location= $this->weatherUtil->getWeatherForCountryAndCity(strtoupper($country), $city);
         $io->writeln(sprintf('Location: %s in %s', $city, $country));
-        $io->table(['Date', 'Temperature'], array_map(fn($m) => [
+        $io->table(['Date', 'Temperature', 'Atmospheric pressure', 'Cloudiness', 'Wind'], array_map(fn($m) => [
             $m->getDate()->format('Y-m-d'),
             $m->getTemperature(),
+            $m->getAtmosphericPressure(),
+            $m->getCloudiness(),
+            $m->getWind()
         ], $location));
 //        $io->table(['Date', 'Temperature'], array_map(fn($m) => [
 //            $m->getDate()->format('Y-m-d'),
