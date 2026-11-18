@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Weather Forecast!{% endblock %}
+
+{% block body %}
+<h1>Weather Forecast</h1>
+    {{ form_start(form,{'attr': {'data-turbo': 'false'}}) }}
+    {{ form_widget(form) }}
+    <button class="btn">Submit</button>
+    {{ form_end(form) }}
+
+    {% if weather %}
+    <h2>Data from Open Meteo</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Max Temperature</th>
+            <th>Max Temperature</th>
+            <th>Precipitation (nm)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%  for i in 0..weather.daily.time|length-1 %}
+        <tr>
+            <td>{{ weather.daily.time[i] }}</td>
+            <td>{{ weather.daily.temperature_2m_max[i] }}</td>
+            <td>{{ weather.daily.temperature_2m_min[i] }}</td>
+            <td>{{ weather.daily.precipitation_sum[i] }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %}
+

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TextInputController!{% endblock %}
+
+{% block body %}
+
+    <h1>Text Submission Form</h1>
+    {{ form_start(form, {'attr': {'data-turbo': 'false'}}) }}
+    {{ form_errors(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    {% if textInput is not empty %}
+        <h2>Submitted text:</h2>
+        <p>{{ textInput }}</p>
+
+   {% endif %}
+{% endblock %}
